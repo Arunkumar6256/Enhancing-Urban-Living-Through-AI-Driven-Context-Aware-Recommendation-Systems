@@ -8,4 +8,5 @@ python-dotenv
 psycopg2-binary
 joblib
 pyarrow
-requests
+requestspython-jose[cryptography]
+pymysql
