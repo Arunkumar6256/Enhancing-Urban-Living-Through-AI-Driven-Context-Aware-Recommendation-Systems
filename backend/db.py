@@ -10,7 +10,12 @@ DATABASE_URL = os.getenv("SQLALCHEMY_DATABASE_URL")
 if not DATABASE_URL:
     raise RuntimeError("SQLALCHEMY_DATABASE_URL not set in .env")
 
-engine = create_engine(DATABASE_URL, pool_pre_ping=True, future=True)
+engine = create_engine(
+    DATABASE_URL,
+    pool_pre_ping=True,
+    future=True,
+    connect_args={"ssl": {"ssl": True}}
+)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 Base = declarative_base()
