@@ -1,704 +1,90 @@
-/* ===============================
-   GOVERNMENT PORTAL UI THEME
-   =============================== */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
 
-/* Tailwind (keep if configured) */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* -------------------------------
-   CSS VARIABLES (Gov palette)
--------------------------------- */
 :root {
-  --gov-blue: #0b3c5d;
-  --gov-blue-dark: #072b42;
-  --gov-accent: #1f6fb2;
-  --gov-light: #f4f7fb;
-  --gov-border: #d9e2ec;
-  --gov-text: #1e293b;
-  --gov-muted: #64748b;
-  --success: #1e7f5c;
-  --warning: #b45309;
+  /* LIGHT MODE (Default) */
+  --bg-primary: #f8fafc;
+  --bg-secondary: #ffffff;
+  --primary: #0b3c5d;
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+  --border: #e2e8f0;
+
+  --font-heading: "Playfair Display", serif;
+  --font-body: "Inter", "Segoe UI", sans-serif;
+
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 }
 
-/* -------------------------------
-   BASE RESET
--------------------------------- */
-html, body, #root {
-  height: 100%;
+.dark {
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --primary: #38bdf8;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --border: #334155;
 }
 
 body {
-  margin: 0;
-  background: var(--gov-light);
-  color: var(--gov-text);
-  font-family: "Segoe UI", Roboto, Arial, sans-serif;
-  line-height: 1.6;
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  font-family: var(--font-body);
 }
 
-/* -------------------------------
-   PAGE CONTAINER
--------------------------------- */
-.container {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 20px;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  color: var(--text-main);
 }
 
-/* -------------------------------
-   HEADER (Government style)
--------------------------------- */
-.header {
-  background: linear-gradient(
-    90deg,
-    var(--gov-blue-dark),
-    var(--gov-blue)
-  );
-  color: white;
-  padding: 16px 24px;
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 24px;
-  animation: slideDown 0.6s ease;
-}
-
-.logo {
-  font-size: 20px;
-  font-weight: 700;
-  letter-spacing: 0.3px;
-}
-
-/* -------------------------------
-   NAV LINKS
--------------------------------- */
-.link-small {
-  color: #e0f2ff;
-  font-weight: 500;
-  text-decoration: none;
-  padding: 6px 10px;
-  border-radius: 4px;
-  transition: background 0.2s ease;
-}
-
-.link-small:hover {
-  background: rgba(255, 255, 255, 0.12);
-}
-
-/* -------------------------------
-   CARD / PANEL (Dashboard style)
--------------------------------- */
 .card {
-  background: white;
-  border: 1px solid var(--gov-border);
-  border-radius: 6px;
-  padding: 20px;
-  margin-bottom: 20px;
-  animation: fadeUp 0.5s ease;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
 }
 
-.card:hover {
-  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
-}
-
-/* -------------------------------
-   SECTION TITLES
--------------------------------- */
-.card h2,
-.card h3 {
-  margin-top: 0;
-  font-weight: 600;
-  color: var(--gov-blue);
-}
-
-/* -------------------------------
-   BUTTONS (Official style)
--------------------------------- */
 .btn {
-  background: var(--gov-accent);
+  background-color: var(--primary);
   color: white;
-  border: none;
-  padding: 10px 16px;
-  font-size: 14px;
-  font-weight: 600;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background 0.2s ease, transform 0.1s ease;
-}
-
-.btn:hover {
-  background: #155a91;
-  transform: translateY(-1px);
-}
-
-.btn:active {
-  transform: translateY(0);
-}
-
-/* Secondary / Outline Button */
-.btn-ghost {
-  background: white;
-  color: var(--gov-accent);
-  border: 1px solid var(--gov-accent);
-  padding: 9px 14px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: 600;
-}
-
-.btn-ghost:hover {
-  background: #eef6ff;
-}
-
-/* -------------------------------
-   FORM INPUTS (Accessible)
--------------------------------- */
-input,
-select,
-textarea {
-  width: 100%;
-  padding: 10px 12px;
-  border-radius: 4px;
-  border: 1px solid var(--gov-border);
-  font-size: 14px;
-  margin-top: 4px;
-  transition: border 0.2s ease, box-shadow 0.2s ease;
-}
-
-input:focus,
-select:focus,
-textarea:focus {
-  outline: none;
-  border-color: var(--gov-accent);
-  box-shadow: 0 0 0 3px rgba(31, 111, 178, 0.15);
-}
-
-/* -------------------------------
-   BADGES (Gov dashboard)
--------------------------------- */
-.badge {
-  display: inline-block;
-  padding: 4px 10px;
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 600;
-  background: #e6f0fa;
-  color: var(--gov-blue);
-}
-
-/* -------------------------------
-   SERVICE / RESULT CARDS
--------------------------------- */
-.service-card {
-  border: 1px solid var(--gov-border);
-  border-radius: 6px;
-  padding: 16px;
-  background: white;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.service-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 24px rgba(0,0,0,0.08);
-}
-
-/* -------------------------------
-   ANIMATIONS (Subtle & Formal)
--------------------------------- */
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* -------------------------------
-   FOOTER (Optional)
--------------------------------- */
-.footer {
-  text-align: center;
-  font-size: 13px;
-  color: var(--gov-muted);
-  margin-top: 40px;
-  padding: 16px;
-}
-/* ---------- Intro Page Background ---------- */
-.intro-bg {
-  min-height: 100vh;
-  background: radial-gradient(
-      circle at 20% 20%,
-      rgba(14, 165, 233, 0.12),
-      transparent 40%
-    ),
-    radial-gradient(
-      circle at 80% 80%,
-      rgba(6, 182, 212, 0.12),
-      transparent 40%
-    ),
-    linear-gradient(135deg, #f8fafc, #ffffff);
-}
-
-/* ---------- Centering ---------- */
-.intro-center {
-  min-height: calc(100vh - 80px); /* header-safe */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
-
-/* ---------- Card ---------- */
-.intro-card {
-  max-width: 540px;
-  text-align: center;
-  padding: 32px;
-}
-
-/* ---------- Typography ---------- */
-.intro-title {
-  font-size: 28px;
-  font-weight: 800;
-  color: #0f172a;
-  margin-bottom: 12px;
-}
-
-.intro-subtitle {
-  color: #475569;
-  font-size: 15px;
-  line-height: 1.6;
-  margin-bottom: 28px;
-}
-
-/* ---------- Feature Pills ---------- */
-.intro-features {
-  display: flex;
-  flex-direction: column;
-  gap: 16px; /* 🔥 space between items */
-  margin-bottom: 28px;
-}
-
-.feature-pill {
-  background: #eaf2fb;
-  padding: 14px 20px;
-  border-radius: 999px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  font-weight: 600;
-  color: #0f172a;
-  box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.04);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.feature-pill:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 18px rgba(3, 105, 161, 0.12);
-}
-
-/* ---------- Button ---------- */
-.intro-btn {
-  margin-top: 8px;
-}
-/* ================= AUTH PAGE BACKGROUND ================= */
-
-.auth-bg {
-  position: relative;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #f8fafc, #eef6ff);
-  overflow: hidden;
-}
-
-/* Centering */
-.auth-center {
-  min-height: calc(100vh - 80px); /* header safe */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  z-index: 2;
-  padding: 20px;
-}
-
-/* Card */
-.auth-card {
-  max-width: 720px;
-  width: 100%;
-  padding: 32px;
-  text-align: center;
-}
-
-/* Actions */
-.auth-actions {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-
-/* ================= FLOATING BLOBS ================= */
-
-.bg-blob {
-  position: absolute;
-  width: 380px;
-  height: 380px;
-  border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.35;
-  animation: floatBlob 18s ease-in-out infinite;
-}
-
-/* Individual blobs */
-.blob-1 {
-  background: #38bdf8;
-  top: -120px;
-  left: -120px;
-}
-
-.blob-2 {
-  background: #22d3ee;
-  bottom: -140px;
-  right: -120px;
-  animation-delay: 4s;
-}
-
-.blob-3 {
-  background: #0ea5a3;
-  top: 40%;
-  left: 60%;
-  animation-delay: 8s;
-}
-
-/* Animation */
-@keyframes floatBlob {
-  0% {
-    transform: translate(0, 0) scale(1);
-  }
-  50% {
-    transform: translate(30px, -20px) scale(1.08);
-  }
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-}
-
-
-/* ================= AUTH / LOGIN BACKGROUND ================= */
-
-.auth-bg {
-  position: relative;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #f8fafc, #eef6ff);
-  overflow: hidden;
-}
-
-.auth-center {
-  min-height: calc(100vh - 80px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  z-index: 2;
-  padding: 20px;
-}
-
-/* Glassmorphism card */
-.glass {
-  background: rgba(255, 255, 255, 0.82);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-}
-
-.auth-card {
-  max-width: 420px;
-  width: 100%;
-  padding: 28px;
-}
-
-/* Form layout */
-.form-grid {
-  display: grid;
-  gap: 12px;
-}
-
-.auth-actions {
-  display: flex;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-/* Error */
-.error-box {
-  background: #fee2e2;
-  color: #9b1c1c;
-  padding: 8px 10px;
-  border-radius: 8px;
-  font-size: 14px;
-  margin-bottom: 10px;
-}
-
-/* ================= FLOATING BLOBS ================= */
-
-.bg-blob {
-  position: absolute;
-  width: 360px;
-  height: 360px;
-  border-radius: 50%;
-  filter: blur(90px);
-  opacity: 0.35;
-  animation: floatBlob 18s ease-in-out infinite;
-}
-
-.blob-1 {
-  background: #38bdf8;
-  top: -140px;
-  left: -140px;
-}
-
-.blob-2 {
-  background: #22d3ee;
-  bottom: -160px;
-  right: -140px;
-  animation-delay: 4s;
-}
-
-.blob-3 {
-  background: #0ea5a3;
-  top: 45%;
-  left: 60%;
-  animation-delay: 8s;
-}
-
-@keyframes floatBlob {
-  0% {
-    transform: translate(0, 0) scale(1);
-  }
-  50% {
-    transform: translate(35px, -25px) scale(1.08);
-  }
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-}
-
-
-
-/* =========================
-   CLICK PARTICLE ANIMATION
-========================= */
-
-.particle {
-  position: fixed;
-  pointer-events: none;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: radial-gradient(circle, #38bdf8, #0ea5e9);
-  animation: particle-float 700ms ease-out forwards;
-  z-index: 9999;
-}
-
-@keyframes particle-float {
-  0% {
-    transform: translate(0, 0) scale(1);
-    opacity: 1;
-  }
-  100% {
-    transform: translate(var(--dx), var(--dy)) scale(0.2);
-    opacity: 0;
-  }
-}
-
-/* =========================
-   GLASS CARD EFFECT
-========================= */
-
-.glass-card {
-  background: rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-}
-
-/* =========================
-   SMOOTH INTERACTION
-========================= */
-
-button, input, select {
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-
-button:active {
-  transform: scale(0.97);
-}
-/* ===============================
-   LAYOUT
-================================ */
-.space-y-10 > * + * {
-  margin-top: 2.5rem;
-}
-
-.text-muted {
-  color: #64748b;
-}
-
-/* ===============================
-   GLASS CARD
-================================ */
-.glass-card {
-  background: rgba(255, 255, 255, 0.78);
-  backdrop-filter: blur(14px);
-  border-radius: 16px;
-  padding: 24px;
-  box-shadow: 0 25px 45px rgba(0, 0, 0, 0.08);
-}
-
-/* ===============================
-   SEARCH CARD
-================================ */
-.search-card {
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.title {
-  font-size: 1.35rem;
-  font-weight: 600;
-  margin-bottom: 1.2rem;
-}
-
-/* ===============================
-   FORM
-================================ */
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-bottom: 18px;
-}
-
-.form-group.horizontal {
-  flex-direction: row;
-  gap: 12px;
-}
-
-input,
-select {
-  border: 1px solid #d1d5db;
-  border-radius: 10px;
-  padding: 10px 12px;
-  font-size: 14px;
-  transition: all 0.25s ease;
-}
-
-input:focus,
-select:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.25);
-  transform: translateY(-1px);
-}
-
-/* ===============================
-   BUTTONS
-================================ */
-.btn {
-  background: #1d4ed8;
-  color: white;
-  padding: 10px 16px;
-  border-radius: 10px;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
   font-weight: 500;
+  transition: background-color 0.2s;
   border: none;
   cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.btn.primary {
-  width: 100%;
 }
 
 .btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 8px 20px rgba(29, 78, 216, 0.3);
+  opacity: 0.9;
 }
 
-.btn:active {
-  transform: scale(0.97);
+.input-field {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 0.375rem;
+  background-color: var(--bg-secondary);
+  color: var(--text-main);
 }
 
-.btn-ghost {
-  background: transparent;
-  border: 1px solid #1d4ed8;
-  color: #1d4ed8;
-  padding: 8px 14px;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: all 0.2s ease;
+.nav-link {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem;
 }
 
-.btn-ghost:hover {
-  background: rgba(29, 78, 216, 0.08);
-}
-
-/* ===============================
-   TOAST
-================================ */
-.toast {
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
-  background: #0ea5a3;
-  color: white;
-  padding: 10px 14px;
-  border-radius: 10px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
-}
-
-/* ===============================
-   ANIMATIONS
-================================ */
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes scaleIn {
-  from {
-    opacity: 0;
-    transform: scale(0.96);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-.fade-in-up {
-  animation: fadeUp 0.6s ease-out both;
-}
-
-.fade-in-scale {
-  animation: scaleIn 0.6s ease-out both;
+.nav-link:hover,
+.nav-link.active {
+  color: var(--primary);
 }

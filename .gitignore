@@ -1,2 +1,36 @@
+# Python
 venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Environment variables
+.env
+.env.*
+
+# Node
+frontend/node_modules/
+frontend/dist/
+
+# Build/cache
+.cache/
+cache/
+
+# Large local data
+*.pbf
+
+# CSV files
 *.csv
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+.vercel
+*.pbf
+*.osm
+*.osm.pbf
+cache/

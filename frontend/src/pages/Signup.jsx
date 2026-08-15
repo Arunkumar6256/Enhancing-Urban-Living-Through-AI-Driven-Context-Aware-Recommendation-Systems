@@ -1,152 +1,6 @@
-// // src/pages/Signup.jsx
-// import React, { useState } from "react";
-// import { postSignup } from "../api";
-
-// const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
-
-// export default function Signup() {
-//   const [form, setForm] = useState({
-//     firstname: "", lastname: "", emailid: "", address: "", username: "", password: "", occupation: ""
-//   });
-//   const [loading, setLoading] = useState(false);
-//   const [msg, setMsg] = useState(null);
-//   const [err, setErr] = useState(null);
-
-//   function onChange(e) {
-//     setForm({ ...form, [e.target.name]: e.target.value });
-//   }
-
-//   async function handleSignup(e) {
-//     e.preventDefault();
-//     setErr(null);
-//     setMsg(null);
-
-//     if (!PASSWORD_REGEX.test(form.password)) {
-//       setErr("Password must be at least 8 characters and include upper, lower, number and special character.");
-//       return;
-//     }
-
-//     setLoading(true);
-//     try {
-//       const res = await postSignup(form);
-//       setMsg(`Signup successful. Username: ${res.username}`);
-//       setForm({ firstname: "", lastname: "", emailid: "", address: "", username: "", password: "", occupation: "" });
-//     } catch (e) {
-//       setErr(e.message || "Signup failed");
-//     } finally { setLoading(false); }
-//   }
-
-//   return (
-//     <div className="max-w-md mx-auto p-6 bg-white rounded shadow">
-//       <h2 className="text-xl font-bold mb-4">Sign up</h2>
-
-//       {msg && <div className="bg-green-100 p-2 mb-3 text-green-800">{msg}</div>}
-//       {err && <div className="bg-red-100 p-2 mb-3 text-red-800">{err}</div>}
-
-//       <form onSubmit={handleSignup} className="space-y-3">
-//         <div className="grid grid-cols-2 gap-2">
-//           <input name="firstname" required placeholder="First name" value={form.firstname} onChange={onChange} className="border p-2 rounded" />
-//           <input name="lastname" required placeholder="Last name" value={form.lastname} onChange={onChange} className="border p-2 rounded" />
-//         </div>
-
-//         <input name="emailid" type="email" required placeholder="Email" value={form.emailid} onChange={onChange} className="border p-2 rounded w-full" />
-//         <input name="address" placeholder="Address" value={form.address} onChange={onChange} className="border p-2 rounded w-full" />
-
-//         <div className="grid grid-cols-2 gap-2">
-//           <input name="username" required placeholder="Username" value={form.username} onChange={onChange} className="border p-2 rounded" />
-//           <input name="occupation" placeholder="Occupation" value={form.occupation} onChange={onChange} className="border p-2 rounded" />
-//         </div>
-
-//         <input name="password" type="password" required placeholder="Password" value={form.password} onChange={onChange} className="border p-2 rounded w-full" />
-//         <div className="text-xs text-gray-500">
-//           Password must be at least 8 characters and include uppercase, lowercase, number and a special character.
-//         </div>
-
-//         <button type="submit" disabled={loading} className="bg-blue-600 text-white px-4 py-2 rounded">
-//           {loading ? "Signing up..." : "Sign up"}
-//         </button>
-//       </form>
-//     </div>
-//   );
-// }
-
-
-// src/pages/Signup.jsx
-// import React, { useState } from "react";
-// import { postSignup } from "../api";
-// import { useNavigate } from "react-router-dom";
-
-// const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
-
-// export default function Signup(){
-//   const nav = useNavigate();
-//   const [form, setForm] = useState({ firstname:"", lastname:"", emailid:"", address:"", username:"", password:"", occupation:"" });
-//   const [loading, setLoading] = useState(false);
-//   const [msg, setMsg] = useState(null);
-//   const [err, setErr] = useState(null);
-
-//   function onChange(e){ setForm({...form, [e.target.name]: e.target.value}); }
-
-//   async function submit(e){
-//     e.preventDefault();
-//     setErr(null);
-//     if (!PASSWORD_REGEX.test(form.password)) {
-//       setErr("Password must be at least 8 characters and include upper, lower, number and special character.");
-//       return;
-//     }
-//     setLoading(true);
-//     try {
-//       const res = await postSignup(form);
-//       setMsg(`Congratulations! Signup successful. You can login now.`);
-//     } catch (e){
-//       setErr(e?.message || String(e));
-//     } finally { setLoading(false); }
-//   }
-
-//   return (
-//     <div className="card fade-in-up" style={{maxWidth:600, margin:"0 auto"}}>
-//       <h2>Sign up</h2>
-
-//       {msg ? (
-//         <div style={{display:"grid", gap:12, alignItems:"center"}}>
-//           <div className="badge">✓ Registered</div>
-//           <div style={{fontWeight:700}}>Congratulations — you can login now</div>
-//           <div style={{color:"#475569"}}>Click continue to go to the login page.</div>
-//           <div style={{display:"flex", gap:12}}>
-//             <button className="btn" onClick={() => nav("/login")}>Continue to Login</button>
-//             <button className="btn-ghost" onClick={() => nav("/")} >Back to Intro</button>
-//           </div>
-//         </div>
-//       ) : (
-//         <form onSubmit={submit} style={{display:"grid", gap:10}}>
-//           <div style={{display:"grid", gridTemplateColumns:"1fr 1fr", gap:8}}>
-//             <input name="firstname" required placeholder="First name" value={form.firstname} onChange={onChange} />
-//             <input name="lastname" required placeholder="Last name" value={form.lastname} onChange={onChange} />
-//           </div>
-//           <input name="emailid" type="email" required placeholder="Email" value={form.emailid} onChange={onChange} />
-//           <input name="address" placeholder="Address" value={form.address} onChange={onChange} />
-//           <div style={{display:"grid", gridTemplateColumns:"1fr 1fr", gap:8}}>
-//             <input name="username" placeholder="Username" required value={form.username} onChange={onChange} />
-//             <input name="occupation" placeholder="Occupation" value={form.occupation} onChange={onChange} />
-//           </div>
-//           <input name="password" type="password" required placeholder="Password" value={form.password} onChange={onChange} maxLength={72} />
-//           <div style={{fontSize:12, color:"#475569"}}>Password rules: min 8 chars, include upper+lower+number+special.</div>
-
-//           {err && <div style={{background:"#fee2e2", color:"#9b1c1c", padding:8, borderRadius:8}}>{err}</div>}
-
-//           <div style={{display:"flex", gap:10, marginTop:6}}>
-//             <button className="btn" type="submit" disabled={loading}>{loading ? "Signing..." : "Sign up"}</button>
-//             <button type="button" className="btn-ghost" onClick={() => nav("/auth-choice")}>Back</button>
-//           </div>
-//         </form>
-//       )}
-//     </div>
-//   );
-// }
-// src/pages/Signup.jsx
 import React, { useState } from "react";
 import { postSignup } from "../api";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const PASSWORD_REGEX =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
@@ -158,7 +12,7 @@ const PROFESSIONS = [
   "Businessman",
   "Doctor",
   "Teacher",
-  "Other"
+  "Other",
 ];
 
 export default function Signup() {
@@ -173,7 +27,7 @@ export default function Signup() {
     password: "",
     profession: "",
     education_level: "",
-    interests: ""
+    interests: "",
   });
 
   const [loading, setLoading] = useState(false);
@@ -186,159 +40,212 @@ export default function Signup() {
 
   async function submit(e) {
     e.preventDefault();
+    if (loading) return;
+
     setErr(null);
 
     if (!PASSWORD_REGEX.test(form.password)) {
       setErr(
-        "Password must be at least 8 characters and include upper, lower, number and special character."
+        "Password must be at least 8 characters and include uppercase, lowercase, number, and symbol."
       );
       return;
     }
 
     setLoading(true);
+
     try {
-      await postSignup(form);
-      setMsg("Signup successful. You can login now.");
+      // 🔧 FIX: trim values before sending
+      const payload = {
+        ...form,
+        firstname: form.firstname.trim(),
+        lastname: form.lastname.trim(),
+        emailid: form.emailid.trim(),
+        address: form.address.trim(),
+        username: form.username.trim(),
+        interests: form.interests.trim(),
+      };
+
+      await postSignup(payload);
+      setMsg("Registration successful. Please proceed to login.");
     } catch (e) {
-      setErr(e?.message || "Signup failed");
+      const msg =
+        e?.data?.detail ||
+        e?.message ||
+        "Registration failed. Please check your inputs.";
+      setErr(msg);
     } finally {
       setLoading(false);
     }
   }
 
   return (
-    <div className="card fade-in-up" style={{ maxWidth: 650, margin: "0 auto" }}>
-      <h2>User Registration</h2>
-
-      {msg ? (
-        <div style={{ display: "grid", gap: 12 }}>
-          <div className="badge">✓ Registered</div>
-          <div style={{ fontWeight: 700 }}>{msg}</div>
-          <button className="btn" onClick={() => nav("/login")}>
-            Continue to Login
-          </button>
-        </div>
-      ) : (
-        <form onSubmit={submit} style={{ display: "grid", gap: 10 }}>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
-            <input
-              name="firstname"
-              required
-              placeholder="First name"
-              value={form.firstname}
-              onChange={onChange}
-            />
-            <input
-              name="lastname"
-              required
-              placeholder="Last name"
-              value={form.lastname}
-              onChange={onChange}
-            />
-          </div>
-
-          <input
-            name="emailid"
-            type="email"
-            required
-            placeholder="Email"
-            value={form.emailid}
-            onChange={onChange}
-          />
-
-          <input
-            name="address"
-            placeholder="Address"
-            value={form.address}
-            onChange={onChange}
-          />
-
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
-            <input
-              name="username"
-              required
-              placeholder="Username"
-              value={form.username}
-              onChange={onChange}
-            />
-
-            <select
-              name="profession"
-              required
-              value={form.profession}
-              onChange={onChange}
-            >
-              <option value="">Select Profession</option>
-              {PROFESSIONS.map(p => (
-                <option key={p} value={p.toLowerCase()}>
-                  {p}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          {form.profession === "student" && (
-            <select
-              name="education_level"
-              value={form.education_level}
-              onChange={onChange}
-            >
-              <option value="">Education Level</option>
-              <option value="school">School</option>
-              <option value="college">College</option>
-              <option value="graduate">Graduate</option>
-            </select>
-          )}
-
-          <input
-            name="interests"
-            placeholder="Interests (e.g. scholarships, internships, health)"
-            value={form.interests}
-            onChange={onChange}
-          />
-
-          <input
-            name="password"
-            type="password"
-            required
-            placeholder="Password"
-            value={form.password}
-            onChange={onChange}
-            maxLength={72}
-          />
-
-          <div style={{ fontSize: 12, color: "#475569" }}>
-            Password must contain uppercase, lowercase, number and special
-            character.
-          </div>
-
-          {err && (
-            <div
-              style={{
-                background: "#fee2e2",
-                color: "#9b1c1c",
-                padding: 8,
-                borderRadius: 6
-              }}
-            >
-              {err}
+    <div className="auth-wrapper">
+      <div className="w-full max-w-2xl">
+        <div className="gov-box animate-enter">
+          <div className="mb-6 border-b border-gray-100 pb-4 flex justify-between items-center">
+            <h2 className="text-2xl font-bold">Citizen Registration</h2>
+            <div className="text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded">
+              Form SC-202
             </div>
-          )}
-
-          <div style={{ display: "flex", gap: 10 }}>
-            <button className="btn" disabled={loading}>
-              {loading ? "Signing..." : "Sign up"}
-            </button>
-            <button
-              type="button"
-              className="btn-ghost"
-              onClick={() => nav("/auth-choice")}
-            >
-              Back
-            </button>
           </div>
-        </form>
-      )}
+
+          {msg ? (
+            <div className="text-center space-y-6 py-8">
+              <div className="inline-block px-4 py-2 rounded-lg bg-green-50 text-green-800 font-bold border border-green-200">
+                ✅ {msg}
+              </div>
+              <button
+                className="btn-gov w-full max-w-xs mx-auto"
+                onClick={() => nav("/login")}
+              >
+                Go to Login
+              </button>
+            </div>
+          ) : (
+            <form onSubmit={submit} className="flex flex-col gap-5">
+              {/* Personal Info */}
+              <div className="p-4 bg-gray-50 rounded border border-gray-100 dark:bg-slate-800 dark:border-slate-700">
+                <h3 className="text-sm font-bold text-muted uppercase mb-3">
+                  Personal Information
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  <input
+                    name="firstname"
+                    required
+                    className="gov-input"
+                    placeholder="First name"
+                    value={form.firstname}
+                    onChange={onChange}
+                    disabled={loading}
+                  />
+                  <input
+                    name="lastname"
+                    required
+                    className="gov-input"
+                    placeholder="Last name"
+                    value={form.lastname}
+                    onChange={onChange}
+                    disabled={loading}
+                  />
+                </div>
+              </div>
+
+              {/* Contact */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <input
+                  name="emailid"
+                  type="email"
+                  required
+                  className="gov-input"
+                  placeholder="Email address"
+                  value={form.emailid}
+                  onChange={onChange}
+                  disabled={loading}
+                />
+                <input
+                  name="address"
+                  className="gov-input"
+                  placeholder="Residential address"
+                  value={form.address}
+                  onChange={onChange}
+                  disabled={loading}
+                />
+              </div>
+
+              {/* Profile */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <input
+                  name="username"
+                  required
+                  className="gov-input"
+                  placeholder="Username"
+                  value={form.username}
+                  onChange={onChange}
+                  disabled={loading}
+                />
+
+                <select
+                  name="profession"
+                  required
+                  value={form.profession}
+                  onChange={onChange}
+                  className="gov-input"
+                  disabled={loading}
+                >
+                  <option value="">-- Select Profession --</option>
+                  {PROFESSIONS.map((p) => (
+                    <option key={p} value={p.toLowerCase()}>
+                      {p}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {form.profession === "student" && (
+                <select
+                  name="education_level"
+                  value={form.education_level}
+                  onChange={onChange}
+                  className="gov-input bg-yellow-50 dark:bg-slate-900"
+                  disabled={loading}
+                >
+                  <option value="">-- Select Education Level --</option>
+                  <option value="school">School</option>
+                  <option value="college">College</option>
+                  <option value="graduate">Graduate</option>
+                </select>
+              )}
+
+              <input
+                name="interests"
+                placeholder="e.g. Health, Education, Transport"
+                className="gov-input"
+                value={form.interests}
+                onChange={onChange}
+                disabled={loading}
+              />
+
+              <div>
+                <input
+                  name="password"
+                  type="password"
+                  required
+                  className="gov-input"
+                  placeholder="Secure password"
+                  value={form.password}
+                  onChange={onChange}
+                  maxLength={72}
+                  disabled={loading}
+                />
+                <p className="text-xs text-muted mt-1">
+                  8+ chars, uppercase, lowercase, number, special.
+                </p>
+              </div>
+
+              {err && (
+                <div className="bg-red-50 text-red-700 p-4 rounded border border-red-200 text-sm">
+                  ⚠️ {err}
+                </div>
+              )}
+
+              <div className="flex gap-4 mt-4 pt-4 border-t border-gray-100">
+                <button
+                  className="btn-gov flex-1 py-3"
+                  disabled={loading}
+                >
+                  {loading ? "Processing..." : "Complete Registration"}
+                </button>
+                <Link
+                  to="/auth-choice"
+                  className="btn-gov-outline flex-1 text-center"
+                >
+                  Cancel
+                </Link>
+              </div>
+            </form>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

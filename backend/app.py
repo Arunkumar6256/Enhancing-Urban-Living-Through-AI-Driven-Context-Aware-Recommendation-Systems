@@ -263,3 +263,5 @@ async def log_requests(request: Request, call_next):
 # register service routes
 from .service_routes import router as service_router
 app.include_router(service_router)
+from backend.chat import router as chat_router
+app.include_router(chat_router)
