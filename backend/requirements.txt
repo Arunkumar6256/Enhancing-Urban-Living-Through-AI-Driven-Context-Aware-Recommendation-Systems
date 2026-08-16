@@ -5,14 +5,9 @@ pandas
 scikit-learn
 sqlalchemy
 python-dotenv
-psycopg2-binary
 joblib
-pyarrow
 requests
 python-jose[cryptography]
 pymysql
 passlib[bcrypt]
-passlib
-bcrypt
-passlib
 email-validator

@@ -11,9 +11,12 @@ from typing import List, Dict, Optional
 # Load dataset ONCE
 # --------------------------------------------------
 BASE_DIR = Path(__file__).resolve().parent.parent
-DATA_PATH = BASE_DIR / "recommender_artifacts" / "item_meta.parquet"
+# DATA_PATH = BASE_DIR / "recommender_artifacts" / "item_meta.parquet"
 
-DATA = pd.read_parquet(DATA_PATH)
+# DATA = pd.read_parquet(DATA_PATH)
+DATA_PATH = BASE_DIR / "backend" / "recommender_artifacts" / "item_meta.csv"
+
+DATA = pd.read_csv(DATA_PATH)
 
 # Normalize text columns once
 DATA["name"] = DATA.get("name", "").fillna("").astype(str)
