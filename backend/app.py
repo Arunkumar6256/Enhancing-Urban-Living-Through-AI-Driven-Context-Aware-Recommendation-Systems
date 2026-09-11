@@ -383,7 +383,7 @@ try:
 
     app.include_router(
         auth.router,
-        prefix="/api/auth"
+        prefix="/api"
     )
 
     logger.info("Auth router included under /api/auth.")
@@ -485,3 +485,5 @@ async def log_requests(
         )
 
         raise
+for route in app.routes:
+    print("REGISTERED ROUTE:", route.path)
